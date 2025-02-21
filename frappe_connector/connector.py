@@ -45,7 +45,12 @@ class FrappeConnector:
 
         if api_key and api_secret:
             self._token_login(api_key, api_secret)
-            
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.close()
 
     def _session_login(self, username: str, password: str):
         response = self._session.post(
@@ -62,6 +67,9 @@ class FrappeConnector:
         raw = f"{api_key}:{api_secret}".encode()
         token = b64encode(raw).decode()
         self._session.headers.update({"Authorization": f"Basic {token}"})
+
+    def close(self):
+        self._session.get(self.base_url, params={"cmd": "logout"})
 
     def get_api(self, method: str, params: dict = None):
         res = self._session.get(
