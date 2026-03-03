@@ -1,12 +1,16 @@
 [project]
 name = "frappe-connector"
 version = "0.1.0"
-description = "A lightweight Python client for interacting with Frappe / ERPNext instances"
+description = "A lightweight Python client for connecting and interacting with Frappe instances"
 readme = "README.md"
+license = { file = "LICENSE.txt" }
 requires-python = ">=3.10"
 dependencies = [
     "requests",
 ]
+
+[project.urls]
+Homepage = "https://github.com/nitefury7/frappe_connector"
 
 [build-system]
 requires = ["hatchling"]
@@ -14,3 +18,6 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["frappe_connector"]
+
+[dependency-groups]
+dev = ["pytest"]
