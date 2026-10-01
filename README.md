@@ -12,7 +12,7 @@ pip install "frappe-connector[mcp]"   # also the MCP server
 The package ships three ways to use it:
 
 - a **Python library** (`FrappeConnector`, below)
-- a **command-line tool**, `frappe-connector` (see [CLI](#cli))
+- a **command-line tool**, `fcn` (see [CLI](#cli))
 - an **MCP server**, `frappe-connector-mcp`, that gives AI assistants access to your site (see [MCP server](#mcp-server))
 
 ## Authentication
@@ -218,22 +218,23 @@ The CLI and MCP server read their connection settings from these variables
 export FRAPPE_URL=https://erp.example.com
 export FRAPPE_API_KEY=your_api_key FRAPPE_API_SECRET=your_api_secret
 
-frappe-connector list Customer --fields name,customer_name --filters '{"disabled": 0}' --limit 50
-frappe-connector get Customer CUST-00001
-frappe-connector get Customer --filters '{"customer_name": "Acme Corp"}' --fields name,email_id
-frappe-connector create Customer '{"customer_name": "Globex", "customer_group": "Commercial"}'
-frappe-connector update Customer CUST-00001 @changes.json     # JSON from a file
-cat doc.json | frappe-connector create Customer -              # JSON from stdin
-frappe-connector rename Customer CUST-OLD CUST-NEW
-frappe-connector submit "Sales Invoice" SINV-00001 --yes
-frappe-connector delete Customer CUST-99999 --yes
-frappe-connector call frappe.client.get_count --get --params '{"doctype": "Customer"}'
+fcn list Customer --fields name,customer_name --filters '{"disabled": 0}' --limit 50
+fcn get Customer CUST-00001
+fcn get Customer --filters '{"customer_name": "Acme Corp"}' --fields name,email_id
+fcn create Customer '{"customer_name": "Globex", "customer_group": "Commercial"}'
+fcn update Customer CUST-00001 @changes.json     # JSON from a file
+cat doc.json | fcn create Customer -              # JSON from stdin
+fcn rename Customer CUST-OLD CUST-NEW
+fcn submit "Sales Invoice" SINV-00001 --yes
+fcn delete Customer CUST-99999 --yes
+fcn call frappe.client.get_count --get --params '{"doctype": "Customer"}'
 ```
 
 Results are printed as JSON (`--compact` for one line), so they pipe nicely
 into `jq`. `delete` and `submit` ask for confirmation unless `--yes` is given.
-Errors go to stderr with exit code 1. Run `frappe-connector COMMAND --help` for
-all options; `python -m frappe_connector` works too.
+Errors go to stderr with exit code 1. Run `fcn COMMAND --help` for all options.
+`frappe-connector` is a longer alias for `fcn`, and `python -m frappe_connector`
+works too.
 
 ---
 
