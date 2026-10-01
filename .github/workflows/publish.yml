@@ -51,6 +51,9 @@ jobs:
   publish:
     needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/frappe-connector
     permissions:
       id-token: write  # PyPI trusted publishing; no API token needed
     steps:
