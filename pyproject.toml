@@ -1,6 +1,6 @@
 [project]
 name = "frappe-connector"
-version = "0.1.2"
+version = "0.2.0"
 description = "A lightweight Python client for connecting and interacting with Frappe instances"
 readme = "README.md"
 license = { file = "LICENSE.txt" }
@@ -9,8 +9,17 @@ dependencies = [
     "requests",
 ]
 
+[project.scripts]
+frappe-connector = "frappe_connector.cli:main"
+frappe-connector-mcp = "frappe_connector.mcp_server:main"
+
 [project.urls]
 Homepage = "https://github.com/nitefury7/frappe_connector"
+
+[project.optional-dependencies]
+mcp = [
+    "mcp>=2.2.0",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -20,4 +29,7 @@ build-backend = "hatchling.build"
 packages = ["frappe_connector"]
 
 [dependency-groups]
-dev = ["pytest"]
+dev = [
+    "pytest",
+    "responses>=0.26.3",
+]
