@@ -5,11 +5,11 @@ Examples:
     export FRAPPE_URL=https://erp.example.com
     export FRAPPE_API_KEY=... FRAPPE_API_SECRET=...
 
-    frappe-connector list Customer --fields name,customer_name --filters '{"disabled": 0}'
-    frappe-connector get Customer CUST-00001
-    frappe-connector create Customer '{"customer_name": "Globex"}'
-    frappe-connector update Customer CUST-00001 @changes.json
-    frappe-connector call frappe.client.get_count --params '{"doctype": "Customer"}'
+    fcn list Customer --fields name,customer_name --filters '{"disabled": 0}'
+    fcn get Customer CUST-00001
+    fcn create Customer '{"customer_name": "Globex"}'
+    fcn update Customer CUST-00001 @changes.json
+    fcn call frappe.client.get_count --params '{"doctype": "Customer"}'
 """
 
 import argparse
@@ -118,7 +118,7 @@ def _cmd_call(client, args):
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="frappe-connector",
+        prog="fcn",
         description="Work with documents and API methods on a Frappe site. "
         "Connection options fall back to the FRAPPE_URL, FRAPPE_API_KEY, "
         "FRAPPE_API_SECRET, FRAPPE_USERNAME, FRAPPE_PASSWORD, FRAPPE_SSL_VERIFY "

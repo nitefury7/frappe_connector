@@ -10,6 +10,7 @@ dependencies = [
 ]
 
 [project.scripts]
+fcn = "frappe_connector.cli:main"
 frappe-connector = "frappe_connector.cli:main"
 frappe-connector-mcp = "frappe_connector.mcp_server:main"
 
