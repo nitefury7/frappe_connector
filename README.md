@@ -300,3 +300,12 @@ configured Frappe user, so a dedicated user with limited roles is a good idea.
 uv sync --all-extras
 uv run pytest
 ```
+
+## Releasing
+
+1. Bump `version` in `pyproject.toml` and merge to `main`.
+2. Tag and push: `git tag v0.2.0 && git push origin v0.2.0`.
+
+The [publish workflow](.github/workflows/publish.yml) runs the tests on
+Python 3.10–3.13, checks that the tag matches the package version, builds,
+and uploads to PyPI via trusted publishing.
